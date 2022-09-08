@@ -7,8 +7,8 @@ plugins {
     id("java")
     // Kotlin support
     id("org.jetbrains.kotlin.jvm") version "1.7.10"
-    // Gradle IntelliJ Plugin
-    id("org.jetbrains.intellij") version "1.8.0"
+    // Gradle IntelliJ Plugin,需要修改该处,否则会出现Null异常
+    id("org.jetbrains.intellij") version "1.5.2"
     // Gradle Changelog Plugin
     id("org.jetbrains.changelog") version "1.3.1"
     // Gradle Qodana Plugin
@@ -20,6 +20,11 @@ version = properties("pluginVersion")
 
 // Configure project's dependencies
 repositories {
+    mavenLocal()
+//    maven { url = uri("http://127.0.0.1:8091/repository/LocalGroups/") }
+    maven {
+        setUrl("http://127.0.0.1:8091/repository/LocalGroups/")
+    }
     mavenCentral()
 }
 
@@ -52,6 +57,14 @@ qodana {
     reportPath.set(projectDir.resolve("build/reports/inspections").canonicalPath)
     saveReport.set(true)
     showReport.set(System.getenv("QODANA_SHOW_REPORT")?.toBoolean() ?: false)
+}
+
+object Versions {
+    const val freemarker = "2.3.28"
+}
+
+dependencies {
+    implementation("org.freemarker:freemarker:${Versions.freemarker}")
 }
 
 tasks {

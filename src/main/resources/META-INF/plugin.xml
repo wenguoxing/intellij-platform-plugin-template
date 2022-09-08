@@ -1,8 +1,14 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>org.jetbrains.plugins.template</id>
-    <name>Template</name>
-    <vendor>JetBrains</vendor>
+    <name>DmsToolsPlugins</name>
+    <vendor email="wenguoxing@126.com" url="https://github.com/wenguoxing">温国兴</vendor>
+
+    <description><![CDATA[
+        基于IDEA插件模板方式创建测试工程<br>
+        <em>1. 学习IDEA插件工程搭建</em>
+        <em>2. 验证插件基础功能实现</em>
+        ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
 
@@ -11,8 +17,27 @@
         <projectService serviceImplementation="org.jetbrains.plugins.template.services.MyProjectService"/>
     </extensions>
 
-    <applicationListeners>
-        <listener class="org.jetbrains.plugins.template.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </applicationListeners>
+<!--    <applicationListeners>-->
+<!--        <listener class="org.jetbrains.plugins.template.listeners.MyProjectManagerListener"-->
+<!--                  topic="com.intellij.openapi.project.ProjectManagerListener"/>-->
+<!--    </applicationListeners>-->
+
+    <actions>
+        <!-- Add your actions here -->
+        <group id="PubEditorPluginDms.Menu" text="_DmsTools" description="DmsTool plugin menu">
+            <add-to-group group-id="MainMenu" anchor="last"/>
+<!--            <add-to-group group-id="MainMenu" anchor="after" relative-to-action="com.jlh.mybatis.view.MVPSupportAction" />-->
+            <action id="DmsCpTool"
+                    class="cn.bugstack.guide.idea.plugin.action.DmsCpToolAction"
+                    text="Ap-Copy"
+                    description="AP拷贝">
+            </action>
+            <action id="DmsCpToolBatch"
+                    class="cn.bugstack.guide.idea.plugin.action.DmsCpToolBatchAction"
+                    text="Batch-Copy"
+                    description="Batch拷贝">
+            </action>
+        </group>
+
+    </actions>
 </idea-plugin>
